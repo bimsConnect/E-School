@@ -1,4 +1,4 @@
-import { FaFacebookF, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
+import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 
 const Footer = () => {
   return (
@@ -15,16 +15,24 @@ const Footer = () => {
           <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
           <ul>
             <li>
-              <a href="/about" className="hover:text-gray-600">About</a>
+              <a href="/about" className="hover:text-gray-600">
+                About
+              </a>
             </li>
             <li>
-              <a href="/services" className="hover:text-gray-600">Services</a>
+              <a href="/services" className="hover:text-gray-600">
+                Services
+              </a>
             </li>
             <li>
-              <a href="/pricing" className="hover:text-gray-600">Pricing</a>
+              <a href="/pricing" className="hover:text-gray-600">
+                Pricing
+              </a>
             </li>
             <li>
-              <a href="/contact" className="hover:text-gray-600">Contact</a>
+              <a href="/contact" className="hover:text-gray-600">
+                Contact
+              </a>
             </li>
           </ul>
         </div>
