@@ -39,15 +39,18 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex flex-1 justify-center space-x-8 md:space-x-12 text-gray-900 text-base md:text-lg font-medium">
-            {['features', 'testimonials', 'pricing', 'contact'].map((item) => (
-              <Link key={item} href={`#${item}`} className="hover:text-blue-700 transition-all duration-300">
-                {item.charAt(0).toUpperCase() + item.slice(1)}
+            {["Features", "Testimonials", "Pricing", "Contact"].map((item) => (
+              <Link key={item} href={`#${item.toLowerCase()}`} className="hover:text-blue-700 transition-all duration-300">
+                {item}
               </Link>
             ))}
           </div>
 
-          {/* AI Chat Button */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Actions */}
+          <div className="hidden md:flex items-center space-x-6">
+            <Link href="/login" className="px-4 py-2 bg-blue-700 text-white rounded-full text-lg font-medium hover:bg-blue-800 transition-all duration-300">
+              Login
+            </Link>
             <button
               onClick={() => setIsChatOpen(!isChatOpen)}
               className="px-4 py-2 border border-blue-700 text-blue-700 rounded-full hover:bg-blue-700 hover:text-white transition-all duration-300 flex items-center gap-2"
@@ -72,16 +75,19 @@ const Navbar: React.FC = () => {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              {['features', 'testimonials', 'pricing', 'contact'].map((item) => (
+              {["Features", "Testimonials", "Pricing", "Contact"].map((item) => (
                 <Link 
                   key={item} 
-                  href={`#${item}`} 
+                  href={`#${item.toLowerCase()}`} 
                   onClick={() => setIsOpen(false)} 
                   className="w-full text-center py-3 rounded-lg hover:bg-blue-100 transition-all duration-300"
                 >
-                  {item.charAt(0).toUpperCase() + item.slice(1)}
+                  {item}
                 </Link>
               ))}
+              <Link href="/login" onClick={() => setIsOpen(false)} className="px-4 py-2 bg-blue-700 text-white rounded-full text-lg font-medium hover:bg-blue-800 transition-all duration-300">
+                Login
+              </Link>
               <button
                 onClick={() => setIsOpen(false)}
                 className="absolute top-5 right-5 text-gray-700"
