@@ -11,6 +11,7 @@
   "dependencies": {
     "@huggingface/inference": "^3.3.6",
     "axios": "^1.7.9",
+    "clsx": "^2.1.1",
     "e-school": "file:",
     "font-awesome": "^4.7.0",
     "framer-motion": "^12.4.7",
@@ -21,7 +22,8 @@
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
     "react-slick": "^0.30.3",
-    "slick-carousel": "^1.8.1"
+    "slick-carousel": "^1.8.1",
+    "tailwind-merge": "^3.0.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

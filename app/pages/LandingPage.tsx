@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { FC } from "react";
 import Image from "next/image";
-import Navbar from "../components/Navbar"; // Mengimpor Navbar
+import Navbar from "../components/Navbar";
 import FeatureCard from "../components/FeatureCard";
 import TestimonialSection from "../components/Testimonial";
+import Pricing from "../components/Pricing";
 import Footer from "../components/Footer";
 
 const LandingPage: FC = () => {
@@ -44,6 +45,11 @@ const LandingPage: FC = () => {
       {/* Testimoni */}
       <section id="testimonials">
         <TestimonialSection />
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing">
+        <Pricing />
       </section>
 
       {/* Footer */}
