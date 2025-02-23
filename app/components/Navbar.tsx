@@ -33,12 +33,12 @@ const Navbar: React.FC = () => {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center py-4">
           {/* Logo */}
-          <Link href="/" className="text-3xl font-extrabold text-blue-700 tracking-wide">
+          <Link href="/" className="text-2xl md:text-3xl font-extrabold text-blue-700 tracking-wide">
             AI Learning
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex flex-1 justify-center space-x-12 text-gray-900 text-lg font-medium">
+          <div className="hidden md:flex flex-1 justify-center space-x-8 md:space-x-12 text-gray-900 text-base md:text-lg font-medium">
             {['features', 'testimonials', 'pricing', 'contact'].map((item) => (
               <Link key={item} href={`#${item}`} className="hover:text-blue-700 transition-all duration-300">
                 {item.charAt(0).toUpperCase() + item.slice(1)}
@@ -66,17 +66,28 @@ const Navbar: React.FC = () => {
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              className="md:hidden fixed inset-0 bg-white/90 backdrop-blur-lg flex flex-col items-center justify-center space-y-6 text-xl font-medium z-40"
+              className="md:hidden fixed inset-0 bg-white/95 backdrop-blur-lg flex flex-col items-center justify-center space-y-6 text-lg font-medium z-40 p-6"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
               {['features', 'testimonials', 'pricing', 'contact'].map((item) => (
-                <Link key={item} href={`#${item}`} onClick={() => setIsOpen(false)} className="hover:text-blue-700 transition-all duration-300">
+                <Link 
+                  key={item} 
+                  href={`#${item}`} 
+                  onClick={() => setIsOpen(false)} 
+                  className="w-full text-center py-3 rounded-lg hover:bg-blue-100 transition-all duration-300"
+                >
                   {item.charAt(0).toUpperCase() + item.slice(1)}
                 </Link>
               ))}
+              <button
+                onClick={() => setIsOpen(false)}
+                className="absolute top-5 right-5 text-gray-700"
+              >
+                <X size={32} />
+              </button>
             </motion.div>
           )}
         </AnimatePresence>
