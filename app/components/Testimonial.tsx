@@ -1,4 +1,4 @@
-"use client"; // Dibutuhkan untuk menggunakan useEffect
+"use client"; // Diperlukan agar Next.js tahu ini Client Component
 
 import { FC, useEffect, useRef, useState } from "react";
 import Image from "next/image";
@@ -26,7 +26,7 @@ const TestimonialSection: FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [scrollX, setScrollX] = useState(0);
 
-  // Auto scroll effect
+  // Auto-scroll effect dengan cleanup agar tidak menyebabkan error
   useEffect(() => {
     const interval = setInterval(() => {
       if (containerRef.current) {
@@ -35,29 +35,16 @@ const TestimonialSection: FC = () => {
       }
     }, 30); // Kecepatan gerakan (30ms sekali)
 
-    return () => clearInterval(interval);
+    return () => clearInterval(interval); // Bersihkan interval saat komponen di-unmount
   }, [scrollX]);
 
   return (
     <section className="py-16 px-8 text-center max-w-7xl mx-auto">
       <h2 className="text-3xl font-bold mb-6">Apa Kata Mereka?</h2>
-      <div
-        ref={containerRef}
-        className="flex space-x-4 overflow-hidden p-4 scrollbar-hide"
-      >
+      <div ref={containerRef} className="flex space-x-4 overflow-hidden p-4 scrollbar-hide">
         {defaultTestimonials.map((testimonial, index) => (
-          <div
-            key={index}
-            className="min-w-[300px] p-6 bg-white shadow-md rounded-lg text-center flex-shrink-0"
-          >
-            <Image
-              src={testimonial.photo}
-              alt={testimonial.name}
-              width={80}
-              height={80}
-              className="mx-auto rounded-full"
-            />
-            {/* Menggunakan HTML entity untuk tanda kutip */}
+          <div key={index} className="min-w-[300px] p-6 bg-white shadow-md rounded-lg text-center flex-shrink-0">
+            <Image src={testimonial.photo} alt={testimonial.name} width={80} height={80} className="mx-auto rounded-full" />
             <p className="italic mt-4">&ldquo;{testimonial.quote}&rdquo;</p>
             <h3 className="mt-4 font-semibold">{testimonial.name}</h3>
           </div>
