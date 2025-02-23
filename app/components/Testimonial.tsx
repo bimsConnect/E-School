@@ -57,7 +57,8 @@ const TestimonialSection: FC = () => {
               height={80}
               className="mx-auto rounded-full"
             />
-            <p className="italic mt-4">"{testimonial.quote}"</p>
+            {/* Menggunakan HTML entity untuk tanda kutip */}
+            <p className="italic mt-4">&ldquo;{testimonial.quote}&rdquo;</p>
             <h3 className="mt-4 font-semibold">{testimonial.name}</h3>
           </div>
         ))}
