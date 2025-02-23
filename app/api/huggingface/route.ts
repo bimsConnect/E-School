@@ -9,7 +9,7 @@ export async function POST(request: Request) {
 
   try {
     const response = await hf.chatCompletion({
-      model: "meta-llama/Llama-3.1-8B-Instruct", // Ganti dengan model yang lebih kecil
+      model: "HuggingFaceH4/zephyr-7b-beta", // Ganti dengan model yang lebih kecil
       messages: [
         {
           role: "user",
