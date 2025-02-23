@@ -34,7 +34,7 @@ const Navbar: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center py-4">
           {/* Logo */}
           <Link href="/" className="text-2xl md:text-3xl font-extrabold text-blue-700 tracking-wide">
-            AI Learning
+            E-School
           </Link>
 
           {/* Desktop Menu */}

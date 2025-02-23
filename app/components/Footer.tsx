@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
         {/* Logo Perusahaan */}
         <div>
-          <h2 className="text-2xl font-bold mb-4">AI Learning</h2>
+          <h2 className="text-2xl font-bold mb-4">E-School</h2>
           <p className="text-gray-600">Empowering Education with AI</p>
         </div>
 
@@ -48,7 +48,7 @@ const Footer = () => {
         {/* Informasi Kontak */}
         <div>
           <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
-          <p className="text-gray-600">Email: info@ailearning.com</p>
+          <p className="text-gray-600">Email: info@eschool.com</p>
           <p className="text-gray-600">Phone: +62 123 4567 890</p>
           <p className="text-gray-600">Address: Jl. Example No. 123, Jakarta</p>
         </div>
@@ -56,7 +56,7 @@ const Footer = () => {
 
       {/* Hak Cipta */}
       <div className="mt-8 text-center text-sm text-gray-500">
-        <p>© {new Date().getFullYear()} AI Learning. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} E-School 2025. All rights reserved.</p>
       </div>
     </footer>
   );
