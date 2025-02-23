@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
 import { Menu, X, MessageSquare } from "lucide-react";
 import ChatAI from "./chatAI/chatAI";
 
 const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [scrolled, setScrolled] = useState<boolean>(false);
-  const [isChatOpen, setIsChatOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,23 +37,16 @@ const Navbar: React.FC = () => {
             AI Learning
           </Link>
 
-          {/* Menu Utama */}
+          {/* Desktop Menu */}
           <div className="hidden md:flex flex-1 justify-center space-x-12 text-gray-900 text-lg font-medium">
-            <Link href="#features" className="hover:text-blue-700 transition-all duration-300">
-              Fitur
-            </Link>
-            <Link href="#testimonials" className="hover:text-blue-700 transition-all duration-300">
-              Testimoni
-            </Link>
-            <Link href="#pricing" className="hover:text-blue-700 transition-all duration-300">
-              Harga
-            </Link>
-            <Link href="#contact" className="hover:text-blue-700 transition-all duration-300">
-              Kontak
-            </Link>
+            {['features', 'testimonials', 'pricing', 'contact'].map((item) => (
+              <Link key={item} href={`#${item}`} className="hover:text-blue-700 transition-all duration-300">
+                {item.charAt(0).toUpperCase() + item.slice(1)}
+              </Link>
+            ))}
           </div>
 
-          {/* Playground AI di Pojok Kanan */}
+          {/* AI Chat Button */}
           <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={() => setIsChatOpen(!isChatOpen)}
@@ -68,9 +61,28 @@ const Navbar: React.FC = () => {
             {isOpen ? <X size={32} /> : <Menu size={32} />}
           </button>
         </div>
+
+        {/* Mobile Menu */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              className="md:hidden fixed inset-0 bg-white/90 backdrop-blur-lg flex flex-col items-center justify-center space-y-6 text-xl font-medium z-40"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+            >
+              {['features', 'testimonials', 'pricing', 'contact'].map((item) => (
+                <Link key={item} href={`#${item}`} onClick={() => setIsOpen(false)} className="hover:text-blue-700 transition-all duration-300">
+                  {item.charAt(0).toUpperCase() + item.slice(1)}
+                </Link>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.nav>
 
-      {/* Popup Window menggunakan Portal */}
+      {/* AI Chat Popup */}
       {isChatOpen &&
         typeof window !== "undefined" &&
         createPortal(
