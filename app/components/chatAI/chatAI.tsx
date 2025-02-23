@@ -37,7 +37,7 @@ const ChatAI = ({ onClose }: ChatAIProps) => {
       const response = await axios.post("/api/huggingface", { message: input });
       const aiMessage: Message = { text: response.data.reply, sender: "ai" };
       setMessages((prevMessages) => [...prevMessages, aiMessage]);
-    } catch (error) {
+    } catch {
       setMessages((prevMessages) => [
         ...prevMessages,
         { text: "Gagal mendapatkan respon dari AI.", sender: "ai" },
