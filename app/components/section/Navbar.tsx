@@ -84,38 +84,58 @@ const Navbar: React.FC = () => {
             </button>
           )}
         </div>
-
-        <AnimatePresence>
-          {isMobile && isOpen && (
-            <motion.div
-              className="md:hidden fixed inset-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg flex flex-col items-center justify-center space-y-6 text-lg font-medium z-40 p-6"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
-              {["Features", "Testimonials", "Pricing"].map((item) => (
-                <Link key={item} href={`#${item.toLowerCase()}`} onClick={() => setIsOpen(false)} className="w-full text-center py-3 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-800 transition-all duration-300">
-                  {item}
-                </Link>
-              ))}
-              <Link href="/login" onClick={() => setIsOpen(false)} className="px-4 py-2 bg-blue-700 text-white rounded-full text-lg font-medium hover:bg-blue-800 transition-all duration-300">
-                Login
-              </Link>
-              <button onClick={() => setTheme(theme === "light" ? "dark" : "light")} className="p-2 rounded-full border border-gray-400 dark:border-gray-700 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 transition-all duration-300">
-                {mounted ? (theme === "dark" ? <Sun size={20} /> : <Moon size={20} />) : <Moon size={20} />}
-              </button>
-              <button onClick={() => setIsChatOpen(true)} className="px-4 py-2 border border-blue-700 text-blue-700 dark:text-white rounded-full hover:bg-blue-700 hover:text-white transition-all duration-300 flex items-center gap-2">
-                <MessageSquare size={20} /> Playground AI
-              </button>
-              <button onClick={() => setIsOpen(false)} className="absolute top-5 right-5 text-gray-700 dark:text-gray-300">
-                <X size={32} />
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </motion.nav>
 
+      {/* Modal Drawer */}
+      <AnimatePresence>
+        {isMobile && isOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              className="fixed inset-0 bg-black/50 z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+            />
+
+            {/* Drawer */}
+            <motion.div
+              className="fixed top-0 left-0 h-full w-64 bg-white dark:bg-gray-900 shadow-lg z-50"
+              initial={{ x: -300 }}
+              animate={{ x: 0 }}
+              exit={{ x: -300 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            >
+              <div className="p-6 flex flex-col space-y-6">
+                <button onClick={() => setIsOpen(false)} className="self-end text-gray-700 dark:text-gray-300">
+                  <X size={24} />
+                </button>
+
+                {["Features", "Testimonials", "Pricing"].map((item) => (
+                  <Link key={item} href={`#${item.toLowerCase()}`} onClick={() => setIsOpen(false)} className="text-gray-900 dark:text-white hover:text-blue-700 dark:hover:text-blue-300 transition-all duration-300">
+                    {item}
+                  </Link>
+                ))}
+
+                <Link href="/login" onClick={() => setIsOpen(false)} className="px-4 py-2 bg-blue-700 text-white rounded-full text-lg font-medium hover:bg-blue-800 transition-all duration-300 text-center">
+                  Login
+                </Link>
+
+                <button onClick={() => setTheme(theme === "light" ? "dark" : "light")} className="p-2 rounded-full border border-gray-400 dark:border-gray-700 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 transition-all duration-300 flex items-center justify-center">
+                  {mounted ? (theme === "dark" ? <Sun size={20} /> : <Moon size={20} />) : <Moon size={20} />}
+                </button>
+
+                <button onClick={() => { setIsChatOpen(true); setIsOpen(false); }} className="px-4 py-2 border border-blue-700 text-blue-700 dark:text-white rounded-full hover:bg-blue-700 hover:text-white transition-all duration-300 flex items-center justify-center gap-2">
+                  <MessageSquare size={20} /> Playground AI
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Chat Modal */}
       {isChatOpen &&
         typeof window !== "undefined" &&
         createPortal(
