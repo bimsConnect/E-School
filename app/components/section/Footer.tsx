@@ -12,19 +12,41 @@ const Footer = () => {
         <div>
           <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Quick Links</h3>
           <ul className="space-y-2">
-            <li><a href="/about" className="hover:text-gray-600 dark:hover:text-gray-400">About</a></li>
-            <li><a href="/services" className="hover:text-gray-600 dark:hover:text-gray-400">Services</a></li>
-            <li><a href="/pricing" className="hover:text-gray-600 dark:hover:text-gray-400">Pricing</a></li>
-            <li><a href="/contact" className="hover:text-gray-600 dark:hover:text-gray-400">Contact</a></li>
+            <li>
+              <a href="/about" className="hover:text-blue-500 dark:hover:text-blue-400">
+                About
+              </a>
+            </li>
+            <li>
+              <a href="/services" className="hover:text-blue-500 dark:hover:text-blue-400">
+                Services
+              </a>
+            </li>
+            <li>
+              <a href="/pricing" className="hover:text-blue-500 dark:hover:text-blue-400">
+                Pricing
+              </a>
+            </li>
+            <li>
+              <a href="/contact" className="hover:text-blue-500 dark:hover:text-blue-400">
+                Contact
+              </a>
+            </li>
           </ul>
         </div>
 
         <div>
           <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Follow Us</h3>
           <div className="flex justify-center md:justify-start space-x-4">
-            <a href="#" className="hover:text-gray-600 dark:hover:text-gray-400"><FaFacebookF size={20} /></a>
-            <a href="#" className="hover:text-gray-600 dark:hover:text-gray-400"><FaTwitter size={20} /></a>
-            <a href="#" className="hover:text-gray-600 dark:hover:text-gray-400"><FaLinkedinIn size={20} /></a>
+            <a href="https://facebook.com" aria-label="Facebook" className="hover:text-blue-500 dark:hover:text-blue-400">
+              <FaFacebookF size={20} />
+            </a>
+            <a href="https://twitter.com" aria-label="Twitter" className="hover:text-blue-500 dark:hover:text-blue-400">
+              <FaTwitter size={20} />
+            </a>
+            <a href="https://linkedin.com" aria-label="LinkedIn" className="hover:text-blue-500 dark:hover:text-blue-400">
+              <FaLinkedinIn size={20} />
+            </a>
           </div>
         </div>
 
@@ -35,6 +57,8 @@ const Footer = () => {
           <p className="text-gray-600 dark:text-gray-400">📍 Jl. Example No. 123, Jakarta</p>
         </div>
       </div>
+
+      <div className="text-center text-gray-500 dark:text-gray-400 mt-4">© {new Date().getFullYear()} E-School. All rights reserved.</div>
     </footer>
   );
 };

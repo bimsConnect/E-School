@@ -25,7 +25,7 @@ const LandingPage: FC = () => {
       </section>
 
       {/* FeatureCard */}
-      <section id="features" className="py-12 bg-white dark:bg-gray-800">
+      <section id="features" className="py-12 bg-gray dark:bg-gray-900">
         <FeatureCard />
       </section>
 
@@ -35,7 +35,7 @@ const LandingPage: FC = () => {
       </section>
 
       {/* Pricing */}
-      <section id="pricing" className="py-12 bg-white dark:bg-gray-800">
+      <section id="pricing" className="py-12 bg-gray-50 dark:bg-gray-900">
         <Pricing />
       </section>
 
