@@ -31,7 +31,7 @@ const Hero = () => {
         </div>
 
         {/* Ikon Media Sosial */}
-        <div className="mt-6 w-full flex justify-center md:justify-start">
+        <div className="w-full flex justify-center md:justify-start mt-6">
           <SocialIcons />
         </div>
       </div>
