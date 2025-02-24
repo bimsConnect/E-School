@@ -20,7 +20,9 @@ const LandingPage: FC = () => {
       <Navbar />
 
       {/* Hero */}
-      <Hero />
+      <section className="pt-24">
+        <Hero />
+      </section>
 
       {/* FeatureCard */}
       <section id="features" className="py-12 bg-white dark:bg-gray-800">
