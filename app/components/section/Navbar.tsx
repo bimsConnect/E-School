@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { createPortal } from "react-dom";
-import { Menu, X, MessageSquare, Sun, Moon } from "lucide-react";
+import { Menu, X, MessageSquare, Sun, Moon, ChevronDown } from "lucide-react";
 import ChatAI from "../../components/chatAI/chatAI";
 import { useTheme } from "next-themes";
 import Image from "next/image";
@@ -15,6 +15,7 @@ const Navbar: React.FC = () => {
   const [isChatOpen, setIsChatOpen] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -49,54 +50,44 @@ const Navbar: React.FC = () => {
             ))}
           </div>
 
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden md:flex items-center space-x-6 relative">
             <button
-              onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-              className="p-2 rounded-full border border-gray-400 dark:border-gray-700 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 transition-all duration-300"
-              disabled={!mounted}
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className="p-2 rounded-full border border-gray-400 dark:border-gray-700 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 transition-all duration-300 flex items-center gap-2"
             >
-              {mounted ? (theme === "dark" ? <Sun size={20} /> : <Moon size={20} />) : <Moon size={20} />}
+              More <ChevronDown size={20} />
             </button>
 
-            <Link href="/login" className="px-4 py-2 bg-blue-700 text-white rounded-full text-lg font-medium hover:bg-blue-800 transition-all duration-300">
-              Login
-            </Link>
-            <button onClick={() => setIsChatOpen(!isChatOpen)} className="px-4 py-2 border border-blue-700 text-blue-700 dark:text-white rounded-full hover:bg-blue-700 hover:text-white transition-all duration-300 flex items-center gap-2">
-              <MessageSquare size={20} /> Playground AI
-            </button>
+            <AnimatePresence>
+              {isDropdownOpen && (
+                <motion.div
+                  className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 shadow-lg rounded-lg overflow-hidden"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <button
+                    onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+                  >
+                    {mounted ? (theme === "dark" ? <Sun size={20} /> : <Moon size={20} />) : <Moon size={20} />} Dark Mode
+                  </button>
+                  <button
+                    onClick={() => setIsChatOpen(!isChatOpen)}
+                    className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center gap-2"
+                  >
+                    <MessageSquare size={20} /> Playground AI
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           <button className="md:hidden text-gray-900 dark:text-white" onClick={() => setIsOpen(!isOpen)}>
             {isOpen ? <X size={32} /> : <Menu size={32} />}
           </button>
         </div>
-
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              className="md:hidden fixed inset-0 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg flex flex-col items-center justify-center space-y-6 text-lg font-medium z-40 p-6"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
-              {["Features", "Testimonials", "Pricing"].map((item) => (
-                <Link key={item} href={`#${item.toLowerCase()}`} onClick={() => setIsOpen(false)} className="w-full text-center py-3 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-800 transition-all duration-300">
-                  {item}
-                </Link>
-              ))}
-              <Link href="/login" onClick={() => setIsOpen(false)} className="px-4 py-2 bg-blue-700 text-white rounded-full text-lg font-medium hover:bg-blue-800 transition-all duration-300">
-                Login
-              </Link>
-              <button onClick={() => setTheme(theme === "light" ? "dark" : "light")} className="p-2 rounded-full border border-gray-400 dark:border-gray-700 bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 transition-all duration-300">
-                {mounted ? (theme === "dark" ? <Sun size={20} /> : <Moon size={20} />) : <Moon size={20} />}
-              </button>
-              <button onClick={() => setIsOpen(false)} className="absolute top-5 right-5 text-gray-700 dark:text-gray-300">
-                <X size={32} />
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </motion.nav>
 
       {isChatOpen &&
